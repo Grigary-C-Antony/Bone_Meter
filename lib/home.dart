@@ -1,3 +1,4 @@
+import 'package:bmeter/previousdata.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,14 @@ class _HomepageState extends State<Homepage> {
               ? HexColor("8e9775")
               : HexColor("ff8474"),
           elevation: 0,
+          leading: IconButton(
+              icon: Icon(Icons.timelapse, size: proH(30)),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Previousdata()),
+                );
+              }),
           actions: [
             IconButton(
                 icon: Icon(Icons.refresh_outlined, size: proH(30)),
@@ -134,271 +143,65 @@ class _HomepageState extends State<Homepage> {
               child: Container(
                 alignment: Alignment.topCenter,
                 child: ListView(physics: BouncingScrollPhysics(), children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(proW(16), 0, proW(16), 0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              height: proH(170),
-                              child: Column(children: [
-                                SizedBox(height: proH(20)),
-                                CircleAvatar(
-                                  backgroundColor: textColorb,
-                                  radius: 20,
-                                  child: Icon(CupertinoIcons.waveform_path,
-                                      color: textColora),
-                                ),
-                                SizedBox(height: proH(5)),
-                                Text("FREQUENCY",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        color: textcolorc,
-                                        fontSize: proW(20),
-                                        fontFamily: "Teko")),
-                                SizedBox(height: proH(5)),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                        "${double.parse((frequency).toStringAsFixed(2))}",
-                                        style: TextStyle(
-                                            decoration: TextDecoration.none,
-                                            color: textColord,
-                                            height: 0.9,
-                                            fontSize: proW(50),
-                                            fontFamily: "Teko")),
-                                    Padding(
-                                      padding: new EdgeInsets.fromLTRB(
-                                          0, proH(15), 0, 0),
-                                      child: Text("Khz",
-                                          style: TextStyle(
-                                              decoration: TextDecoration.none,
-                                              color: textColord,
-                                              fontSize: proW(20),
-                                              fontFamily: "Teko")),
-                                    ),
-                                  ],
-                                ),
-                              ])),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: proH(30)),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(proW(16), 0, proW(16), 0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              height: proH(210),
-                              child: Column(children: [
-                                SizedBox(height: proH(20)),
-                                CircleAvatar(
-                                  backgroundColor: textColorb,
-                                  radius: 20,
-                                  child: Icon(CupertinoIcons.speedometer,
-                                      color: textColora),
-                                ),
-                                SizedBox(height: proH(5)),
-                                Text("VELOCITY",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        color: textcolorc,
-                                        fontSize: proW(20),
-                                        fontFamily: "Teko")),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                        "${double.parse((frequency * 14.92537).toStringAsFixed(1))}",
-                                        style: TextStyle(
-                                            decoration: TextDecoration.none,
-                                            color: textColord,
-                                            fontSize: proW(50),
-                                            fontFamily: "Teko")),
-                                    Padding(
-                                      padding: new EdgeInsets.fromLTRB(
-                                          0, proH(15), 0, 0),
-                                      child: Text("m/s",
-                                          style: TextStyle(
-                                              decoration: TextDecoration.none,
-                                              color: textColord,
-                                              fontSize: proW(25),
-                                              fontFamily: "Teko")),
-                                    ),
-                                  ],
-                                ),
-                              ])),
-                        ),
-                        SizedBox(width: proW(30)),
-                        Expanded(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              height: proH(210),
-                              child: Column(children: [
-                                SizedBox(height: proH(20)),
-                                CircleAvatar(
-                                  backgroundColor: textColorb,
-                                  radius: 20,
-                                  child: Icon(Icons.fitness_center,
-                                      color: textColora),
-                                ),
-                                SizedBox(height: proH(5)),
-                                Text("BONE DENSITY",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        color: textcolorc,
-                                        fontSize: proW(20),
-                                        fontFamily: "Teko")),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                        "${double.parse((522.613 / frequency).toStringAsFixed(2))}",
-                                        style: TextStyle(
-                                            decoration: TextDecoration.none,
-                                            color: textColord,
-                                            fontSize: proW(50),
-                                            fontFamily: "Teko")),
-                                    Padding(
-                                      padding: new EdgeInsets.fromLTRB(
-                                          0, proH(15), 0, 0),
-                                      child: Text("",
-                                          style: TextStyle(
-                                              decoration: TextDecoration.none,
-                                              color: textColord,
-                                              fontSize: proW(25),
-                                              fontFamily: "Teko")),
-                                    ),
-                                  ],
-                                ),
-                              ])),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: proH(30)),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(proW(16), 0, proW(16), 0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              height: proH(210),
-                              child: Column(children: [
-                                SizedBox(height: proH(20)),
-                                CircleAvatar(
-                                  backgroundColor: textColorb,
-                                  radius: 20,
-                                  child: Icon(Icons.spa, color: textColora),
-                                ),
-                                SizedBox(height: proH(5)),
-                                Text("T-SCORE",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        color: textcolorc,
-                                        fontSize: proW(20),
-                                        fontFamily: "Teko")),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                        "${double.parse((((522.613 / frequency) - 0.856) / .1627).toStringAsFixed(2))}",
-                                        style: TextStyle(
-                                            decoration: TextDecoration.none,
-                                            color: textColord,
-                                            fontSize: proW(50),
-                                            fontFamily: "Teko")),
-                                    Padding(
-                                      padding: new EdgeInsets.fromLTRB(
-                                          0, proH(15), 0, 0),
-                                      child: Text("",
-                                          style: TextStyle(
-                                              decoration: TextDecoration.none,
-                                              color: textColord,
-                                              fontSize: proW(20),
-                                              fontFamily: "Teko")),
-                                    ),
-                                  ],
-                                ),
-                              ])),
-                        ),
-                        SizedBox(width: proW(30)),
-                        Expanded(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              height: proH(210),
-                              child: Column(children: [
-                                SizedBox(height: proH(20)),
-                                CircleAvatar(
-                                  backgroundColor: textColorb,
-                                  radius: 20,
-                                  child: Icon(CupertinoIcons.bolt_fill,
-                                      color: textColora),
-                                ),
-                                SizedBox(height: proH(5)),
-                                Text("VOLTAGE",
-                                    style: TextStyle(
-                                        decoration: TextDecoration.none,
-                                        color: textcolorc,
-                                        fontSize: proW(20),
-                                        fontFamily: "Teko")),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                        "${double.parse((voltage).toStringAsFixed(2))}",
-                                        style: TextStyle(
-                                            decoration: TextDecoration.none,
-                                            color: textColord,
-                                            fontSize: proW(50),
-                                            fontFamily: "Teko")),
-                                    Padding(
-                                      padding: new EdgeInsets.fromLTRB(
-                                          0, proH(15), 0, 0),
-                                      child: Text("V",
-                                          style: TextStyle(
-                                              decoration: TextDecoration.none,
-                                              color: textColord,
-                                              fontSize: proW(20),
-                                              fontFamily: "Teko")),
-                                    ),
-                                  ],
-                                ),
-                              ])),
-                        ),
-                      ],
-                    ),
-                  ),
+                  cardEs(Icons.spa, "T-Score",
+                      (((522.613 / frequency) - 0.856) / .1627), ""),
+                  cardEs(Icons.fitness_center, "BONE DENSITY",
+                      522.613 / frequency, ""),
+                  cardEs(CupertinoIcons.waveform_path, "FREQUENCY", frequency,
+                      "kHZ"),
                 ]),
               ),
             )
           ])),
     );
   }
+}
+
+Widget cardEs(icones, textes, valueses, unites) {
+  return Padding(
+    padding: EdgeInsets.all(proW(16)),
+    child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        height: proH(170),
+        child: Column(children: [
+          SizedBox(height: proH(20)),
+          CircleAvatar(
+            backgroundColor: textColorb,
+            radius: 20,
+            child: Icon(icones, color: textColora),
+          ),
+          SizedBox(height: proH(5)),
+          Text(textes,
+              style: TextStyle(
+                  decoration: TextDecoration.none,
+                  color: textcolorc,
+                  fontSize: proW(25),
+                  fontFamily: "Teko")),
+          SizedBox(height: proH(5)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("${double.parse((valueses).toStringAsFixed(2))}",
+                  style: TextStyle(
+                      decoration: TextDecoration.none,
+                      color: textColord,
+                      height: 0.9,
+                      fontSize: proW(50),
+                      fontFamily: "Teko")),
+              Padding(
+                padding: new EdgeInsets.fromLTRB(0, proH(15), 0, 0),
+                child: Text(unites,
+                    style: TextStyle(
+                        decoration: TextDecoration.none,
+                        color: textColord,
+                        fontSize: proW(20),
+                        fontFamily: "Teko")),
+              ),
+            ],
+          ),
+        ])),
+  );
 }

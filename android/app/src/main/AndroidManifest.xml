@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bmeter">
    <application
-        android:label="bmeter"
+        android:label="Osteoperosis detector"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
